@@ -28,20 +28,20 @@ class OptimizeNow extends StatelessWidget {
           // print(json_datas[0]);
 
           //----データ全取得
-          var memos = await Eitango.getEitangos();
-          print(memos);
-          var satabase = await Eitango.database;
-          var entango = Eitango(
-              word: "test",
-              part: "part",
-              mean: "mean",
-              pure_mean: "pure_mean",
-              pronunciation: "pronunciation",
-              mean_in_english: "mean_in_english",
-              explanation: "explanation",
-              example_in_en: "example_in_en",
-              example_in_ja: "example_in_ja");
-          Eitango.insertEitango(entango);
+          // var memos = await Eitango.getEitangos();
+          // print(memos);
+          // var satabase = await Eitango.database;
+          // var entango = Eitango(
+          //     word: "test",
+          //     part: "part",
+          //     mean: "mean",
+          //     pure_mean: "pure_mean",
+          //     pronunciation: "pronunciation",
+          //     mean_in_english: "mean_in_english",
+          //     explanation: "explanation",
+          //     example_in_en: "example_in_en",
+          //     example_in_ja: "example_in_ja");
+          // Eitango.insertEitango(entango);
 
           //----データ全削除
           // Eitango.alldeleteEitango();

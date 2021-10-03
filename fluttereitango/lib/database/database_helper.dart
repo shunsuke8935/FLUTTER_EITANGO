@@ -49,7 +49,7 @@ class Eitango {
       onCreate: (db, version) {
         return db.execute(
           // テーブルの作成
-          "CREATE TABLE eitango(id INTEGER PRIMARY KEY AUTOINCREMENT, text TEXT)",
+          "CREATE TABLE eitango(id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT, part TEXT, mean TEXT, pure_mean TEXT, pronunciation TEXT, mean_in_english TEXT, explanation TEXT, example_in_en TEXT, example_in_ja TEXT",
         );
       },
       version: 1,
