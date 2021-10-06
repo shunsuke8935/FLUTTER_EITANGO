@@ -1,43 +1,16 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-class Eitango {
+class Memo {
   final int? id;
-  final String? word;
-  final String part;
-  final String mean;
-  final String pure_mean;
-  final String pronunciation;
-  final String mean_in_english;
-  final String explanation;
-  final String example_in_en;
-  final String example_in_ja;
+  final String? text;
 
-  Eitango({
-    this.id,
-    required this.word,
-    required this.part,
-    required this.mean,
-    required this.pure_mean,
-    required this.pronunciation,
-    required this.mean_in_english,
-    required this.explanation,
-    required this.example_in_en,
-    required this.example_in_ja,
-  });
+  Memo({this.id, this.text});
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'word': word,
-      'part': part,
-      'mean': mean,
-      'pure_mean': pure_mean,
-      'pronunciation': pronunciation,
-      'mean_in_english': mean_in_english,
-      'explanation': explanation,
-      'example_in_en': example_in_en,
-      'example_in_ja': example_in_ja,
+      'text': text,
     };
   }
 
@@ -45,11 +18,11 @@ class Eitango {
     // openDatabase() データベースに接続
     final Future<Database> _database = openDatabase(
       // getDatabasesPath() データベースファイルを保存するパス取得
-      join(await getDatabasesPath(), 'eitango_database.db'),
+      join(await getDatabasesPath(), 'memo_database.db'),
       onCreate: (db, version) {
         return db.execute(
           // テーブルの作成
-          "CREATE TABLE eitango(id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT, part TEXT, mean TEXT, pure_mean TEXT, pronunciation TEXT, mean_in_english TEXT, explanation TEXT, example_in_en TEXT, example_in_ja TEXT",
+          "CREATE TABLE memo(id INTEGER PRIMARY KEY AUTOINCREMENT, text TEXT)",
         );
       },
       version: 1,
@@ -57,64 +30,44 @@ class Eitango {
     return _database;
   }
 
-  //データの挿入
-  static Future<void> insertEitango(Eitango eitango, {String? word}) async {
+  static Future<void> insertMemo(Memo memo) async {
     final Database db = await database;
     await db.insert(
-      'eitango',
-      eitango.toMap(),
+      'memo',
+      memo.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 
-  //データ取得
-  static Future<List<Eitango>> getEitangos() async {
+  static Future<List<Memo>> getMemos() async {
     final Database db = await database;
-    final List<Map<String, dynamic>> maps = await db.query('eitango');
+    final List<Map<String, dynamic>> maps = await db.query('memo');
     return List.generate(maps.length, (i) {
-      return Eitango(
+      return Memo(
         id: maps[i]['id'],
-        word: maps[i]['word'],
-        part: maps[i]['part'],
-        mean: maps[i]['mean'],
-        pure_mean: maps[i]['pure_mean'],
-        pronunciation: maps[i]['pronunciation'],
-        mean_in_english: maps[i]['mean_in_english'],
-        explanation: maps[i]['explanation'],
-        example_in_en: maps[i]['example_in_en'],
-        example_in_ja: maps[i]['example_in_ja'],
+        text: maps[i]['text'],
       );
     });
   }
 
-  //データのアップデート
-  static Future<void> updateEitango(Eitango eitango) async {
+  static Future<void> updateMemo(Memo memo) async {
     // Get a reference to the database.
     final db = await database;
     await db.update(
-      'eitango',
-      eitango.toMap(),
+      'memo',
+      memo.toMap(),
       where: "id = ?",
-      whereArgs: [eitango.id],
+      whereArgs: [memo.id],
       conflictAlgorithm: ConflictAlgorithm.fail,
     );
   }
 
-  //データの削除
-  static Future<void> deleteEitango(int id) async {
+  static Future<void> deleteMemo(int id) async {
     final db = await database;
     await db.delete(
-      'eitango',
+      'memo',
       where: "id = ?",
       whereArgs: [id],
-    );
-  }
-
-  //データ全削除
-  static Future<void> alldeleteEitango() async {
-    final db = await database;
-    await db.delete(
-      'eitango',
     );
   }
 }
