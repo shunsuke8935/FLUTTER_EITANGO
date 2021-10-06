@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1044071222693",
+    "project_id": "flutter-eitango",
+    "storage_bucket": "flutter-eitango.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1044071222693:android:c0a6f61c6106591aaeec4c",
+        "android_client_info": {
+          "package_name": "com.example.fluttereitango"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1044071222693-d4u0m990qa716qurnh915flql09riu3j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARBQDyzBv0255RfPse5aOrQNurCuWI1PA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1044071222693-d4u0m990qa716qurnh915flql09riu3j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
