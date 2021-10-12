@@ -47,7 +47,7 @@ class Eitango {
     var path = join(await getDatabasesPath(), 'eitango_database.db');
 
     //データベース削除
-    await deleteDatabase(path);
+    // await deleteDatabase(path);
 
     //データベース削除
     final Future<Database> _database = openDatabase(
@@ -56,7 +56,18 @@ class Eitango {
       onCreate: (db, version) {
         return db.execute(
           // テーブルの作成
-          "CREATE TABLE eitango(id INTEGER PRIMARY KEY AUTOINCREMENT, text TEXT, test Text)",
+          """CREATE TABLE eitango(
+            id INTEGER PRIMARY KEY AUTOINCREMENT, 
+            word TEXT, 
+            part Text, 
+            mean Text, 
+            pure_mean Text, 
+            pronunciation Text, 
+            mean_in_english Text, 
+            explanation Text, 
+            example_in_en Text, 
+            example_in_ja Text
+            )""",
         );
       },
       version: 1,
@@ -111,5 +122,35 @@ class Eitango {
       where: "id = ?",
       whereArgs: [id],
     );
+  }
+
+  //jsondataを受け取って登録していく
+  static Future<List> insertFromJson(List jsons) async {
+    final Database db = await database;
+    print(jsons);
+    for (var row in jsons) {
+      var check_word = await Eitango.checkWord("word", row["word"]);
+      if (check_word > 0) {
+        print("すでに登録済みのデータ");
+      } else {
+        print("登録しました。");
+        var eitango = Eitango(word: row["word"]);
+        await Eitango.insertEitango(eitango);
+      }
+    }
+
+    //全権取得
+    var result = await getEitangos();
+    return result;
+  }
+
+  //データベースに登録してあるデータをチェックする
+  static Future<int> checkWord(String column, String word) async {
+    final Database db = await database;
+    final String sql = 'SELECT count(*) FROM eitango WHERE ${column}="${word}"';
+    final List<Map<String, dynamic>> result = await db.rawQuery(sql);
+    final word_count = Sqflite.firstIntValue(result);
+    var res_int = word_count!.toInt();
+    return res_int;
   }
 }
