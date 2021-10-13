@@ -31,11 +31,10 @@ class OptimizeNow extends StatelessWidget {
           //データ作成
           var kakunin = await Eitango.getEitangos();
           print("全権取得------------------");
-          print(kakunin);
 
           //データ挿入
-          var memo_ = Eitango(word: "確認", mean: "testです");
-          Eitango.insertEitango(memo_);
+          // var memo_ = Eitango(word: "確認", mean: "testです");
+          // Eitango.insertEitango(memo_);
         },
         child: Text('Optimize Now', style: TextStyle(color: Colors.white)),
       ),

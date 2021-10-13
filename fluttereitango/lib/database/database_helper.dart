@@ -57,15 +57,15 @@ class Eitango {
         return db.execute(
           // テーブルの作成
           """CREATE TABLE eitango(
-            id INTEGER PRIMARY KEY AUTOINCREMENT, 
-            word TEXT, 
-            part Text, 
-            mean Text, 
-            pure_mean Text, 
-            pronunciation Text, 
-            mean_in_english Text, 
-            explanation Text, 
-            example_in_en Text, 
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            word TEXT,
+            part Text,
+            mean Text,
+            pure_mean Text,
+            pronunciation Text,
+            mean_in_english Text,
+            explanation Text,
+            example_in_en Text,
             example_in_ja Text
             )""",
         );
@@ -75,13 +75,20 @@ class Eitango {
     return _database;
   }
 
+  //未登録のデータのみ保存する　wordで判断
   static Future<void> insertEitango(Eitango eitango) async {
     final Database db = await database;
-    await db.insert(
-      'eitango',
-      eitango.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
+    var check_word = await Eitango.checkWord('word', eitango.word.toString());
+    if (check_word > 0) {
+        print('既に登録済みのデータです');
+    } else {
+      print('未登録のデータです。');
+      await db.insert(
+        'eitango',
+        eitango.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace,
     );
+    }
   }
 
   static Future<List<Eitango>> getEitangos() async {
