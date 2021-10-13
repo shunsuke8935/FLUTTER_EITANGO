@@ -21,25 +21,21 @@ class OptimizeNow extends StatelessWidget {
           ),
         ),
         onPressed: () async {
-          //jsonfileを読み込んでjsonstringで返却する。
+          //json取得→map化
+          var json_string = await loadAsset();
+          List json_datas = json.decode(json_string);
 
-          // var json_string = await loadAsset();
-          // List json_datas = json.decode(json_string);
-          // print(json_datas[0]);
+          //json一括登録メソッド
+          // Eitango.insertFromJson(json_datas);
 
           //データ作成
-          var kakunin = await Memo.getMemos();
+          var kakunin = await Eitango.getEitangos();
           print("全権取得------------------");
           print(kakunin);
 
           //データ挿入
-          var memo_ = Memo(text: "確認");
-          Memo.insertMemo(memo_);
-
-          //データ挿入確認
-          var check = await Memo.getMemos();
-          print("登録後確認-----------------");
-          print(check);
+          var memo_ = Eitango(word: "確認", mean: "testです");
+          Eitango.insertEitango(memo_);
         },
         child: Text('Optimize Now', style: TextStyle(color: Colors.white)),
       ),
