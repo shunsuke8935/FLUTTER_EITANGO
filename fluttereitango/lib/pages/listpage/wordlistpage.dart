@@ -14,14 +14,20 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData.light(),
-      home: AdminMobilePage(),
+      home: PartWordListPage("no param"),
     );
   }
 }
 
-class AdminMobilePage extends StatelessWidget {
+//各品詞ページ
+class PartWordListPage extends StatelessWidget {
+  //遷移前ページから引数を受け取りイニシャライザ
+  PartWordListPage(this.test);
+  String test;
+
   @override
   Widget build(BuildContext context) {
+    print(test);
     return Scaffold(
       body: Row(
         children: [

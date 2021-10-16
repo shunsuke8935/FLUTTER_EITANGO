@@ -5,8 +5,7 @@ import 'indicator.dart';
 import 'optimizenow.dart';
 import 'optimizerbutton.dart';
 
-
-class BatteryOptimizerPage extends StatelessWidget {
+class TopPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +20,7 @@ class BatteryOptimizerPage extends StatelessWidget {
           children: [
             OptimizerButtons(),
             BatteryLevelIndicator(),
-            AppsDrainage(),
+            PartList(),
             OptimizeNow(),
           ],
         ),

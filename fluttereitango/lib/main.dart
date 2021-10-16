@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttereitango/pages/toppage/batteryoptimizerpage.dart';
+import 'package:fluttereitango/pages/toppage/toppage.dart';
 
 import 'database/database_helper.dart';
 
@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
       ),
 
       //バッテリーページ
-      home: BatteryOptimizerPage(),
+      home: TopPage(),
     );
   }
 
@@ -64,23 +64,3 @@ class _MyAppState extends State<MyApp> {
     return res_json;
   }
 }
-
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       title: 'Flutter Demo',
-//       theme: ThemeData.light().copyWith(
-//         primaryColor: Colors.white,
-//         primaryTextTheme: TextTheme(
-//           headline6: TextStyle(color: kColorTitle),
-//         ),
-//         backgroundColor: Colors.white,
-//       ),
-
-//       //バッテリーページ
-//       home: BatteryOptimizerPage(),
-//     );
-//   }
-// }

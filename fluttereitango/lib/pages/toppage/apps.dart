@@ -1,10 +1,12 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:fluttereitango/icons/part_icon_icons.dart';
 import 'package:fluttereitango/pages/listpage/wordlistpage.dart';
 
 import '../../main.dart';
+
+//品詞リスト
+//今のところ使わない
+List partList = ["全体", "名詞", "動詞", "形容詞", "副詞", "助動詞", "前置詞"];
 
 class _HorizontalBorder extends StatelessWidget {
   @override
@@ -22,19 +24,19 @@ class _AppColumn extends StatelessWidget {
   final Icon icon;
   final String percentage;
 
-
   const _AppColumn({
     Key? key,
     required this.name,
     required this.icon,
     required this.percentage,
-    }) : super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder:(context) => AdminMobilePage()));
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => PartWordListPage(name)));
       },
       leading: icon,
       title: Text(
@@ -49,7 +51,7 @@ class _AppColumn extends StatelessWidget {
   }
 }
 
-class AppsDrainage extends StatelessWidget {
+class PartList extends StatelessWidget {
   var child;
 
   @override

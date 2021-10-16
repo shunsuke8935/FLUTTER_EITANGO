@@ -1,9 +1,7 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttereitango/icons/part_icon_icons.dart';
-import 'package:fluttereitango/pages/toppage/batteryoptimizerpage.dart';
+import 'package:fluttereitango/pages/toppage/toppage.dart';
 
 class SideNavigation extends StatefulWidget {
   @override
@@ -26,8 +24,9 @@ class _SideNavigationState extends State<SideNavigation> {
         NavigationRailDestination(
           icon: IconButton(
             icon: Icon(Icons.arrow_back_outlined),
-            onPressed: (){
-              Navigator.pop(context, MaterialPageRoute(builder:(context) => BatteryOptimizerPage()));
+            onPressed: () {
+              Navigator.pop(
+                  context, MaterialPageRoute(builder: (context) => TopPage()));
             },
           ),
           label: Text('ThumbsUpDown'),

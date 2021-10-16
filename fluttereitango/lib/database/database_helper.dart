@@ -42,6 +42,7 @@ class Eitango {
     };
   }
 
+  //データベース作成
   static Future<Database> get database async {
     // openDatabase() データベースに接続
     var path = join(await getDatabasesPath(), 'eitango_database.db');
@@ -75,6 +76,8 @@ class Eitango {
     return _database;
   }
 
+  //----------------CREATE-----------------
+  //CREATE ONE
   static Future<void> insertEitango(Eitango eitango) async {
     final Database db = await database;
     await db.insert(
@@ -84,47 +87,7 @@ class Eitango {
     );
   }
 
-  static Future<List<Eitango>> getEitangos() async {
-    final Database db = await database;
-    final List<Map<String, dynamic>> maps = await db.query('eitango');
-    return List.generate(maps.length, (i) {
-      return Eitango(
-        id: maps[i]['id'],
-        word: maps[i]['word'],
-        part: maps[i]['part'],
-        mean: maps[i]['mean'],
-        pure_mean: maps[i]['pure_mean'],
-        pronunciation: maps[i]['pronunciation'],
-        mean_in_english: maps[i]['mean_in_english'],
-        explanation: maps[i]['explanation'],
-        example_in_en: maps[i]['example_in_en'],
-        example_in_ja: maps[i]['example_in_ja'],
-      );
-    });
-  }
-
-  static Future<void> updateEitango(Eitango eitango) async {
-    // Get a reference to the database.
-    final db = await database;
-    await db.update(
-      'eitango',
-      eitango.toMap(),
-      where: "id = ?",
-      whereArgs: [eitango.id],
-      conflictAlgorithm: ConflictAlgorithm.fail,
-    );
-  }
-
-  static Future<void> deleteEitango(int id) async {
-    final db = await database;
-    await db.delete(
-      'eitango',
-      where: "id = ?",
-      whereArgs: [id],
-    );
-  }
-
-  //jsondataを受け取って登録していく
+  //CREATE ALL FROM JSON
   static Future<List> insertFromJson(List jsons) async {
     final Database db = await database;
     print(jsons);
@@ -144,7 +107,28 @@ class Eitango {
     return result;
   }
 
-  //データベースに登録してあるデータをチェックする
+  //----------------GET-----------------
+  //GET ALL
+  static Future<List<Eitango>> getEitangos() async {
+    final Database db = await database;
+    final List<Map<String, dynamic>> maps = await db.query('eitango');
+    return List.generate(maps.length, (i) {
+      return Eitango(
+        id: maps[i]['id'],
+        word: maps[i]['word'],
+        part: maps[i]['part'],
+        mean: maps[i]['mean'],
+        pure_mean: maps[i]['pure_mean'],
+        pronunciation: maps[i]['pronunciation'],
+        mean_in_english: maps[i]['mean_in_english'],
+        explanation: maps[i]['explanation'],
+        example_in_en: maps[i]['example_in_en'],
+        example_in_ja: maps[i]['example_in_ja'],
+      );
+    });
+  }
+
+  //GET EXIST RECORD
   static Future<int> checkWord(String column, String word) async {
     final Database db = await database;
     final String sql = 'SELECT count(*) FROM eitango WHERE ${column}="${word}"';
@@ -152,5 +136,30 @@ class Eitango {
     final word_count = Sqflite.firstIntValue(result);
     var res_int = word_count!.toInt();
     return res_int;
+  }
+
+  //----------------UPDATE-----------------
+  //UPDATE
+  static Future<void> updateEitango(Eitango eitango) async {
+    // Get a reference to the database.
+    final db = await database;
+    await db.update(
+      'eitango',
+      eitango.toMap(),
+      where: "id = ?",
+      whereArgs: [eitango.id],
+      conflictAlgorithm: ConflictAlgorithm.fail,
+    );
+  }
+
+  //----------------DELETE-----------------
+  //DELETE ONE
+  static Future<void> deleteEitango(int id) async {
+    final db = await database;
+    await db.delete(
+      'eitango',
+      where: "id = ?",
+      whereArgs: [id],
+    );
   }
 }
