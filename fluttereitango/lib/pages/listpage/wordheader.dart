@@ -4,23 +4,30 @@ import 'package:fluttereitango/database/database_helper.dart';
 import 'package:fluttereitango/icons/part_icon_icons.dart';
 import 'package:fluttereitango/pages/testpage/testappvar.dart';
 
-// ignore: must_be_immutable
-class _IconColor extends StatelessWidget {
-  _IconColor(this.part);
+class _PartContainer extends StatelessWidget {
+  _PartContainer(this.part);
   String part;
 
   Map iconColor = {
     "名詞": Colors.blue,
-    "動詞": Colors.blue,
-    "形容詞": Colors.blue,
-    "副詞": Colors.blue,
-    "助動詞": Colors.blue,
-    "前置詞": Colors.blue
+    "動詞": Colors.red,
+    "形容詞": Colors.green,
+    "副詞": Colors.orange,
+    "助動詞": Colors.black,
+    "前置詞": Colors.greenAccent
   };
 
   @override
   Widget build(BuildContext context) {
-    return iconColor[part];
+    return Container(
+      //ここにカラーを返却するクラス配置
+      color: iconColor[part],
+      width: 48,
+      height: 48,
+      //受け取った品詞によって表示するアイコンを変える
+      //ここにクラスを配置して引数にpartを受け取り適切なアイコンを表示する。
+      child: Center(child: _PartIcon(part)),
+    );
   }
 }
 
@@ -30,21 +37,27 @@ class _PartIcon extends StatelessWidget {
   Map partIcon = {
     "名詞": Icon(
       PartIcon.noun,
+      color: Colors.black,
     ),
     "動詞": Icon(
       PartIcon.verb,
+      color: Colors.black,
     ),
     "形容詞": Icon(
       PartIcon.adjective,
+      color: Colors.black,
     ),
     "副詞": Icon(
       PartIcon.adverb,
+      color: Colors.black,
     ),
     "助動詞": Icon(
       PartIcon.Auxiliaryverb,
+      color: Colors.black,
     ),
     "前置詞": Icon(
       PartIcon.preposition,
+      color: Colors.black,
     )
   };
 
@@ -178,15 +191,7 @@ class _Post extends StatelessWidget {
           children: [
             ListTile(
               leading: ClipOval(
-                child: Container(
-                  //ここにカラーを返却するクラス配置
-                  color: _IconColor(part),
-                  width: 48,
-                  height: 48,
-                  //受け取った品詞によって表示するアイコンを変える
-                  //ここにクラスを配置して引数にpartを受け取り適切なアイコンを表示する。
-                  child: Center(child: _PartIcon(part)),
-                ),
+                child: _PartContainer(part),
               ),
               title: Text(name),
               subtitle: Text('2 min ago'),
