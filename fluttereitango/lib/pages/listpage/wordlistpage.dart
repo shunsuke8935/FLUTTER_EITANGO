@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttereitango/database/database_helper.dart';
 import 'package:fluttereitango/pages/listpage/saidenavi.dart';
 import 'package:fluttereitango/pages/listpage/wordheader.dart';
 
@@ -20,21 +21,53 @@ class MyApp extends StatelessWidget {
 }
 
 //各品詞ページ
-class PartWordListPage extends StatelessWidget {
-  //遷移前ページから引数を受け取りイニシャライザ
-  PartWordListPage(this.test);
-  String test;
+// class PartWordListPage extends StatelessWidget {
+//   //遷移前ページから引数を受け取りイニシャライザ
+//   PartWordListPage(this.part_name);
+//   String part_name;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     print(part_name);
+//     var list = getdatas();
+//     return Scaffold(
+//       body: Row(
+//         children: [
+//           SideNavigation(),
+//           VerticalDivider(thickness: 1, width: 1),
+//           Expanded(
+//             child: PostList(),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+
+// Future<List> getdatas() async {
+//   var result_list = await Eitango.getEitangos();
+//   return result_list;
+// }
+// }
+
+class PartWordListPage extends StatefulWidget {
+  PartWordListPage(this.part_name);
+  String part_name;
 
   @override
+  _PartWordListPageState createState() => _PartWordListPageState();
+}
+
+class _PartWordListPageState extends State<PartWordListPage> {
+  @override
   Widget build(BuildContext context) {
-    print(test);
+    print(widget.part_name);
     return Scaffold(
       body: Row(
         children: [
           SideNavigation(),
           VerticalDivider(thickness: 1, width: 1),
           Expanded(
-            child: PostList(),
+            child: PostList(widget.part_name),
           ),
         ],
       ),

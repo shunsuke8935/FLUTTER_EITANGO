@@ -97,7 +97,16 @@ class Eitango {
         print("すでに登録済みのデータ");
       } else {
         print("登録しました。");
-        var eitango = Eitango(word: row["word"]);
+        var eitango = Eitango(
+            word: row["word"],
+            part: row["part"],
+            mean: row["mean"],
+            pure_mean: row["pure_mean"],
+            pronunciation: row["pronunciation"],
+            mean_in_english: row["mean_in_english"],
+            explanation: row["explanation"],
+            example_in_en: row["example_in_en"],
+            example_in_ja: row["example_in_ja"]);
         await Eitango.insertEitango(eitango);
       }
     }
@@ -136,6 +145,15 @@ class Eitango {
     final word_count = Sqflite.firstIntValue(result);
     var res_int = word_count!.toInt();
     return res_int;
+  }
+
+  //GET CUSTOM
+  static Future<List<Map<String, dynamic>>> getPartAllWords(
+      String column, String value) async {
+    final Database db = await database;
+    final String sql = "SELECT * FROM eitango WHERE ${column}='${value}'";
+    final List<Map<String, dynamic>> result = await db.rawQuery(sql);
+    return result;
   }
 
   //----------------UPDATE-----------------
