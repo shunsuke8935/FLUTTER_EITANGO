@@ -156,6 +156,15 @@ class Eitango {
     return result;
   }
 
+  //GET RANDOM THREE WORD AND CORRECT WORD
+  static Future<List<Map<String, dynamic>>> getFourWords(
+      String column, String value) async {
+    final Database db = await database;
+    final String sql = "SELECT * FROM eitango WHERE ${column}='${value}'";
+    final List<Map<String, dynamic>> result = await db.rawQuery(sql);
+    return result;
+  }
+
   //----------------UPDATE-----------------
   //UPDATE
   static Future<void> updateEitango(Eitango eitango) async {

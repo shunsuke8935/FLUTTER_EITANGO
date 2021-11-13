@@ -155,7 +155,7 @@ class _PostsHeader extends StatelessWidget {
 
 class _Post extends StatelessWidget {
   final String name;
-  final String message;
+  final String mean;
   final String textReason;
   final Color colorPrimary;
   final Color colorPositive;
@@ -167,7 +167,7 @@ class _Post extends StatelessWidget {
   const _Post(
       {Key? key,
       required this.name,
-      required this.message,
+      required this.mean,
       required this.textReason,
       required this.colorPrimary,
       required this.colorPositive,
@@ -194,7 +194,6 @@ class _Post extends StatelessWidget {
                 child: _PartContainer(part),
               ),
               title: Text(name),
-              subtitle: Text('2 min ago'),
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 8),
@@ -211,7 +210,7 @@ class _Post extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: 8),
-                  Flexible(child: Text(message)),
+                  Flexible(child: Text(mean)),
                 ],
               ),
             ),
@@ -227,7 +226,7 @@ class _Post extends StatelessWidget {
                     ),
                     child: Text(
                       textReason,
-                      style: TextStyle(color: Colors.blueAccent),
+                      style: TextStyle(color: colorPrimary),
                     ),
                   ),
                   SizedBox(width: 24),
@@ -262,9 +261,19 @@ class _Post extends StatelessWidget {
 }
 
 class _PostGreen extends StatelessWidget {
-  _PostGreen(this.word, this.part);
+  _PostGreen(this.word, this.part, this.mean);
   String word;
   String part;
+  String mean;
+
+  Map someColor = {
+    "名詞": Colors.blue,
+    "動詞": Colors.red,
+    "形容詞": Colors.green,
+    "副詞": Colors.orange,
+    "助動詞": Colors.black,
+    "前置詞": Colors.greenAccent
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -272,13 +281,13 @@ class _PostGreen extends StatelessWidget {
       //ここにfirestoreから取得した英単語を入れる
       name: word,
       //ここに例文を入れる
-      message: 'I have an Apple',
-      textReason: 'Report Details',
-      colorPrimary: Colors.blueAccent,
-      colorPositive: Colors.blueAccent,
-      textPositive: 'NO',
-      colorNegative: Colors.blueAccent,
-      textNegative: 'OK',
+      mean: mean,
+      textReason: "詳細",
+      colorPrimary: someColor[part],
+      colorPositive: someColor[part],
+      textPositive: '要チェック',
+      colorNegative: someColor[part],
+      textNegative: '覚えた',
       part: part,
     );
   }
@@ -307,7 +316,8 @@ class _PostListState extends State<PostList> {
           Expanded(
               child: ListView.builder(
             itemBuilder: (BuildContext context, int index) {
-              return _PostGreen(partList[index]["word"], widget.part);
+              return _PostGreen(partList[index]["word"], widget.part,
+                  partList[index]["mean"]);
             },
             itemCount: partList.length,
           ))
