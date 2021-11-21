@@ -42,7 +42,7 @@ class FlightBookingPage extends StatelessWidget {
       body: Column(
         children: [
           FlightInfo(),
-          TicketList(),
+          TestsItem("名詞", "apple"),
         ],
       ),
     );

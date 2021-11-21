@@ -156,12 +156,27 @@ class Eitango {
     return result;
   }
 
-  //GET RANDOM THREE WORD AND CORRECT WORD
-  static Future<List<Map<String, dynamic>>> getFourWords(
+  //GET RANDOM THREE WORD
+  static Future<List<Map<String, dynamic>>> getThreeWords(
       String column, String value) async {
+    //品詞の全件取得からランダムな3つを取りだし返却
     final Database db = await database;
-    final String sql = "SELECT * FROM eitango WHERE ${column}='${value}'";
-    final List<Map<String, dynamic>> result = await db.rawQuery(sql);
+    final String sql_random =
+        "SELECT id, word, pure_mean FROM eitango WHERE ${column}='${value}' ORDER BY RANDOM() LIMIT 3";
+    final List<Map<String, dynamic>> result = await db.rawQuery(sql_random);
+
+    return result;
+  }
+
+  //GET CORRECT WORD
+  static Future<List<Map<String, dynamic>>> getOneWords(
+      String column, String value, String word) async {
+    //品詞の全件取得からランダムな3つを取りだし返却
+    final Database db = await database;
+    final String sql_random =
+        "SELECT id, word, pure_mean FROM eitango WHERE ${column}='${value}' and word='${word}'";
+    final List<Map<String, dynamic>> result = await db.rawQuery(sql_random);
+
     return result;
   }
 
