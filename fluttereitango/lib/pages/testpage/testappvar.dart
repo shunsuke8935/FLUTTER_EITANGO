@@ -21,7 +21,7 @@ const kEmiratesLogoUrl =
 const kHainanLogoUrl =
     'https://user-images.githubusercontent.com/7200238/82223309-73adce00-995d-11ea-98c0-2dba4e094aca.png';
 
-class FlightBookingPage extends StatelessWidget {
+class TestPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

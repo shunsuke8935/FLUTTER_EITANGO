@@ -24,9 +24,10 @@ class _optionalState extends State<optional> {
             child: Text(
               //ここ変数
               widget.word,
-              style: TextStyle(fontSize: 30),
+              style: TextStyle(fontSize: 17),
             ),
             style: OutlinedButton.styleFrom(
+              padding: EdgeInsets.all(10),
               primary: Colors.black,
               shape: const StadiumBorder(),
               //ここを変数にする
@@ -100,8 +101,11 @@ class _TestsItemState extends State<TestsItem> {
   }
 
   Future<void> getTestWords() async {
-    var dummyWords = await Eitango.getThreeWords("part", "名詞");
-    var correct_word = await Eitango.getOneWords("part", "名詞", "apple");
+    print(widget.part);
+    print(widget.word);
+    var dummyWords = await Eitango.getThreeWords("part", widget.part);
+    var correct_word =
+        await Eitango.getOneWords("part", widget.part, widget.word);
 
     //ダミーの三件を回してリストに入れる
     for (var item in dummyWords) {

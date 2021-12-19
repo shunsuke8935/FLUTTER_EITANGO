@@ -168,10 +168,21 @@ class Eitango {
     return result;
   }
 
+  //GET RANDOM ONE WORD
+  static Future<List<Map<String, dynamic>>> getRandomOneWords(
+      String column, String value) async {
+    //品詞の全件取得からランダムな1つを取りだし返却
+    final Database db = await database;
+    final String sql_random =
+        "SELECT id, word, pure_mean FROM eitango WHERE ${column}='${value}' ORDER BY RANDOM() LIMIT 1";
+    final List<Map<String, dynamic>> result = await db.rawQuery(sql_random);
+
+    return result;
+  }
+
   //GET CORRECT WORD
   static Future<List<Map<String, dynamic>>> getOneWords(
       String column, String value, String word) async {
-    //品詞の全件取得からランダムな3つを取りだし返却
     final Database db = await database;
     final String sql_random =
         "SELECT id, word, pure_mean FROM eitango WHERE ${column}='${value}' and word='${word}'";

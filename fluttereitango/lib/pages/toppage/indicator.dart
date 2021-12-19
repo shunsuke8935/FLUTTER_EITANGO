@@ -1,14 +1,18 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:fluttereitango/pages/testpage/testappvar.dart';
+import 'package:fluttereitango/parts/commons.dart';
 import '../../main.dart';
 
 class _BatteryLevelIndicatorPainter extends CustomPainter {
   final double percentage; // バッテリーレベルの割合
   final double textCircleRadius; // 内側に表示される白丸の半径
+  String part;
 
   _BatteryLevelIndicatorPainter({
     required this.percentage,
     required this.textCircleRadius,
+    required this.part,
   });
 
   @override
@@ -17,8 +21,8 @@ class _BatteryLevelIndicatorPainter extends CustomPainter {
       final per = i / 360.0;
       // 割合（0~1.0）からグラデーション色に変換
       final color = ColorTween(
-        begin: kColorIndicatorBegin,
-        end: kColorIndicatorEnd,
+        begin: iconColor[part],
+        end: iconColor[part],
       ).lerp(per)!;
       final paint = Paint()
         ..color = color
@@ -52,30 +56,37 @@ class _BatteryLevelIndicatorPainter extends CustomPainter {
   }
 }
 
-class BatteryLevelIndicator extends StatelessWidget {
-  final percentage = 0.7;
-  final size = 164.0;
+class BatteryLevelIndicator_ extends StatefulWidget {
+  BatteryLevelIndicator_(this.percentage, this.size, this.part);
+  String part;
+  double percentage;
+  double size;
 
+  @override
+  _BatteryLevelIndicator_State createState() => _BatteryLevelIndicator_State();
+}
+
+class _BatteryLevelIndicator_State extends State<BatteryLevelIndicator_> {
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
       painter: _BatteryLevelIndicatorPainter(
-        percentage: percentage,
-        textCircleRadius: size * 0.5,
-      ),
+          percentage: widget.percentage,
+          textCircleRadius: widget.size * 0.5,
+          part: widget.part),
       child: Container(
         padding: const EdgeInsets.all(64),
         child: Material(
           color: Colors.white,
           elevation: kElevation,
-          borderRadius: BorderRadius.circular(size * 0.5),
+          borderRadius: BorderRadius.circular(widget.size * 0.5),
           child: Container(
-            width: size,
-            height: size,
+            width: widget.size,
+            height: widget.size,
             child: Center(
               child: Text(
-                '${percentage * 100}%',
-                style: TextStyle(color: kColorPink, fontSize: 48),
+                '${widget.percentage * 100}%',
+                style: TextStyle(color: iconColor[widget.part], fontSize: 48),
               ),
             ),
           ),

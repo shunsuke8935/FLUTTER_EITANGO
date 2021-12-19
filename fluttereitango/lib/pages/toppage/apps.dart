@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttereitango/icons/part_icon_icons.dart';
 import 'package:fluttereitango/pages/listpage/wordlistpage.dart';
+import 'package:fluttereitango/pages/optionpage/option.dart';
 
 import '../../main.dart';
 
@@ -35,8 +36,8 @@ class _AppColumn extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => PartWordListPage(name)));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => OptionPage(name)));
       },
       leading: icon,
       title: Text(

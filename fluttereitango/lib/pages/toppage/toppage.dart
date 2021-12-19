@@ -19,7 +19,7 @@ class TopPage extends StatelessWidget {
         child: Column(
           children: [
             OptimizerButtons(),
-            BatteryLevelIndicator(),
+            BatteryLevelIndicator_(0.1, 173.0, "全体"),
             PartList(),
             OptimizeNow(),
           ],

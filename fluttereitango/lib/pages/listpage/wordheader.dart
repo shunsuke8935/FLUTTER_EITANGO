@@ -3,19 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:fluttereitango/database/database_helper.dart';
 import 'package:fluttereitango/icons/part_icon_icons.dart';
 import 'package:fluttereitango/pages/testpage/testappvar.dart';
+import 'package:fluttereitango/parts/commons.dart';
 
 class _PartContainer extends StatelessWidget {
   _PartContainer(this.part);
   String part;
-
-  Map iconColor = {
-    "名詞": Colors.blue,
-    "動詞": Colors.red,
-    "形容詞": Colors.green,
-    "副詞": Colors.orange,
-    "助動詞": Colors.black,
-    "前置詞": Colors.greenAccent
-  };
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +84,7 @@ class _PostsHeader extends StatelessWidget {
                   Navigator.of(context).push(
                     PageRouteBuilder(
                       pageBuilder: (context, animation, secondaryAnimation) {
-                        return FlightBookingPage();
+                        return TestPage();
                       },
                       transitionsBuilder:
                           (context, animation, secondaryAnimation, child) {
@@ -104,6 +96,7 @@ class _PostsHeader extends StatelessWidget {
                                 .chain(CurveTween(curve: Curves.easeInOut));
                         final Animation<Offset> offsetAnimation =
                             animation.drive(tween);
+
                         return SlideTransition(
                           position: offsetAnimation,
                           child: child,
