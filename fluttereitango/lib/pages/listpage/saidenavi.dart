@@ -25,7 +25,7 @@ class _SideNavigationState extends State<SideNavigation> {
           icon: IconButton(
             icon: Icon(Icons.arrow_back_outlined),
             onPressed: () {
-              Navigator.pop(
+              Navigator.push(
                   context, MaterialPageRoute(builder: (context) => TopPage()));
             },
           ),

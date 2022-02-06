@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:fluttereitango/pages/listpage/wordlistpage.dart';
+import 'package:fluttereitango/pages/optionpage/option.dart';
 import 'package:fluttereitango/pages/testpage/testicon.dart';
 import 'package:fluttereitango/pages/testpage/testlist.dart';
 import 'package:fluttereitango/parts/commons.dart';
@@ -40,10 +41,10 @@ class _TestPage_State extends State<TestPage_> {
         leading: IconButton(
           icon: Icon(Icons.navigate_before, color: Colors.black),
           onPressed: () {
-            Navigator.pop(
+            Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => PartWordListPage("no param")));
+                    builder: (context) => OptionPage(widget.part)));
             ;
           },
         ),

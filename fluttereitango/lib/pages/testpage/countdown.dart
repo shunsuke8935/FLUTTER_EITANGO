@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttereitango/pages/listpage/saidenavi.dart';
+import 'package:fluttereitango/pages/listpage/wordlistpage.dart';
 import 'package:fluttereitango/pages/optionpage/option.dart';
+import 'package:fluttereitango/pages/testpage/testappvar.dart';
 import 'package:fluttereitango/pages/toppage/indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttereitango/parts/commons.dart';
@@ -37,8 +39,10 @@ class _count_pageState extends State<count_page> {
     sub.onDone(() {
       print("Done");
       sub.cancel();
-      _current = 10;
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => TestPage_(widget.part)));
     });
+    _current = 3;
   }
 
   @override
@@ -51,8 +55,12 @@ class _count_pageState extends State<count_page> {
           children: <Widget>[
             // ⑤現在のカウントを表示
             Text(
-              "$_current秒",
-              style: Theme.of(context).textTheme.display1,
+              "$_current",
+              style: TextStyle(
+                fontWeight: FontWeight.normal,
+                fontSize: 300,
+                color: Colors.blueGrey,
+              ),
             ),
             // ⑦カウントダウン関数を実行するボタン
             ElevatedButton(

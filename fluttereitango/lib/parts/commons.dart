@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttereitango/pages/listpage/wordlistpage.dart';
+import 'package:fluttereitango/pages/optionpage/option.dart';
 
 //アイコンのカラー
 Map iconColor = {
@@ -33,10 +34,8 @@ class _backButtonState extends State<backButton> {
       leading: IconButton(
         icon: Icon(Icons.navigate_before, color: Colors.black),
         onPressed: () {
-          Navigator.pop(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => PartWordListPage("no param")));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => OptionPage(widget.part)));
           ;
         },
       ),

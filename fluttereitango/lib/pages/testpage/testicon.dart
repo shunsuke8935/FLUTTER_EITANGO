@@ -45,7 +45,7 @@ class _TestHeadState extends State<TestHead> {
                 Container(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    '20/2',
+                    '10/1',
                     style: TextStyle(color: kColorFlightText.withOpacity(0.5)),
                   ),
                 ),
