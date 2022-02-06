@@ -3,10 +3,12 @@ import 'package:fluttereitango/pages/listpage/saidenavi.dart';
 import 'package:fluttereitango/pages/optionpage/option.dart';
 import 'package:fluttereitango/pages/toppage/indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttereitango/parts/commons.dart';
 import 'package:quiver/async.dart';
 
 class count_page extends StatefulWidget {
-  count_page({Key? key}) : super(key: key);
+  count_page(this.part);
+  String part;
 
   @override
   _count_pageState createState() => _count_pageState();
@@ -42,9 +44,7 @@ class _count_pageState extends State<count_page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("テスト"),
-      ),
+      appBar: backButton(widget.part),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

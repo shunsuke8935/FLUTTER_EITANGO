@@ -83,8 +83,10 @@ class _optionElementState extends State<optionElement> {
                       builder: (context) => TestPage_(widget.part)));
             }
             if (widget.text == "テスト") {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => count_page()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => count_page(widget.part)));
             }
           },
           child: Text(
