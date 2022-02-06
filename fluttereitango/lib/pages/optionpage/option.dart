@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttereitango/pages/listpage/saidenavi.dart';
 import 'package:fluttereitango/pages/listpage/wordheader.dart';
 import 'package:fluttereitango/pages/listpage/wordlistpage.dart';
+import 'package:fluttereitango/pages/testpage/countdown.dart';
 import 'package:fluttereitango/pages/testpage/testappvar.dart';
 import 'package:fluttereitango/pages/toppage/indicator.dart';
 import 'package:fluttereitango/parts/commons.dart';
@@ -77,11 +78,13 @@ class _optionElementState extends State<optionElement> {
             }
             if (widget.text == "復習") {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => TestPage()));
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => TestPage_(widget.part)));
             }
             if (widget.text == "テスト") {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => TestPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => count_page()));
             }
           },
           child: Text(

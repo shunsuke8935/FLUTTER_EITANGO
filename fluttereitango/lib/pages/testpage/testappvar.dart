@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttereitango/pages/listpage/wordlistpage.dart';
 import 'package:fluttereitango/pages/testpage/testicon.dart';
 import 'package:fluttereitango/pages/testpage/testlist.dart';
+import 'package:fluttereitango/parts/commons.dart';
 
 const kColorPrimary = Colors.blue;
 const kColorText = Color(0xFF9E9E9E);
@@ -21,10 +22,19 @@ const kEmiratesLogoUrl =
 const kHainanLogoUrl =
     'https://user-images.githubusercontent.com/7200238/82223309-73adce00-995d-11ea-98c0-2dba4e094aca.png';
 
-class TestPage extends StatelessWidget {
+class TestPage_ extends StatefulWidget {
+  TestPage_(this.part);
+  String part;
+
+  @override
+  _TestPage_State createState() => _TestPage_State();
+}
+
+class _TestPage_State extends State<TestPage_> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //戻るボタン
       appBar: AppBar(
         elevation: 0,
         leading: IconButton(
@@ -37,12 +47,12 @@ class TestPage extends StatelessWidget {
             ;
           },
         ),
-        backgroundColor: Colors.blue,
+        backgroundColor: iconColor[widget.part],
       ),
       body: Column(
         children: [
-          FlightInfo(),
-          TestsItem("名詞", "apple"),
+          TestHead(widget.part),
+          TestsItem(widget.part, "apple"),
         ],
       ),
     );

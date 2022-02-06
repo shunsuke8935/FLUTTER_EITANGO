@@ -59,7 +59,15 @@ class _PartIcon extends StatelessWidget {
   }
 }
 
-class _PostsHeader extends StatelessWidget {
+class testElement extends StatefulWidget {
+  testElement(this.part);
+  String part;
+
+  @override
+  _testElementState createState() => _testElementState();
+}
+
+class _testElementState extends State<testElement> {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -84,7 +92,7 @@ class _PostsHeader extends StatelessWidget {
                   Navigator.of(context).push(
                     PageRouteBuilder(
                       pageBuilder: (context, animation, secondaryAnimation) {
-                        return TestPage();
+                        return TestPage_(widget.part);
                       },
                       transitionsBuilder:
                           (context, animation, secondaryAnimation, child) {
@@ -143,6 +151,7 @@ class _PostsHeader extends StatelessWidget {
         ),
       ],
     );
+    ;
   }
 }
 
@@ -305,7 +314,7 @@ class _PostListState extends State<PostList> {
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
-          _PostsHeader(),
+          testElement(widget.part),
           Expanded(
               child: ListView.builder(
             itemBuilder: (BuildContext context, int index) {

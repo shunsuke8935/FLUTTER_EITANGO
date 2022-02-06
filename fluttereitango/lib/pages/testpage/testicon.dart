@@ -2,14 +2,23 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:fluttereitango/pages/testpage/testappvar.dart';
+import 'package:fluttereitango/parts/commons.dart';
 
-class FlightInfo extends StatelessWidget {
+class TestHead extends StatefulWidget {
+  TestHead(this.part);
+  String part;
+
+  @override
+  _TestHeadState createState() => _TestHeadState();
+}
+
+class _TestHeadState extends State<TestHead> {
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Material(
-          color: kColorPrimary,
+          color: iconColor[widget.part],
           elevation: 24,
           shadowColor: kColorPrimary,
           borderRadius: BorderRadius.only(

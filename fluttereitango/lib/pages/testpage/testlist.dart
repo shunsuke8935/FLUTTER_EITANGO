@@ -3,11 +3,13 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:fluttereitango/database/database_helper.dart';
 import 'package:fluttereitango/pages/testpage/testappvar.dart';
+import 'package:fluttereitango/parts/commons.dart';
 
 class optional extends StatefulWidget {
-  optional(this.word);
+  optional(this.word, this.part);
 
   String word;
+  String part;
 
   @override
   _optionalState createState() => _optionalState();
@@ -31,7 +33,7 @@ class _optionalState extends State<optional> {
               primary: Colors.black,
               shape: const StadiumBorder(),
               //ここを変数にする
-              side: const BorderSide(color: Colors.blue),
+              side: BorderSide(color: iconColor[widget.part]),
               minimumSize: Size(300, 70),
             ),
             onPressed: () {},
@@ -84,7 +86,8 @@ class _TestsItemState extends State<TestsItem> {
                   vertical: 8,
                 ),
                 child: Column(children: [
-                  for (var item in words) optional(item["pure_mean"])
+                  for (var item in words)
+                    optional(item["pure_mean"], widget.part)
                 ]),
               ),
             ),
@@ -101,8 +104,6 @@ class _TestsItemState extends State<TestsItem> {
   }
 
   Future<void> getTestWords() async {
-    print(widget.part);
-    print(widget.word);
     var dummyWords = await Eitango.getThreeWords("part", widget.part);
     var correct_word =
         await Eitango.getOneWords("part", widget.part, widget.word);
