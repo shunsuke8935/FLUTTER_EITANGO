@@ -59,6 +59,7 @@ flutter:
   assets:
     - json/20211002_TSL.json
     - json/TSL_EITANGO.json
+    - images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

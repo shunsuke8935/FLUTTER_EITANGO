@@ -31,24 +31,35 @@ class _count_pageState extends State<count_page> {
     var sub = countDownTimer.listen(null);
     sub.onData((duration) {
       setState(() {
-        _current = _start - duration.elapsed.inSeconds; //毎秒減らしていく
+        //0秒は更新しないように
+        if (_current != 1) {
+          _current = _start - duration.elapsed.inSeconds; //毎秒減らしていく
+        }
+        print(_current);
       });
     });
 
-    // ④終了時の処理
     sub.onDone(() {
       print("Done");
       sub.cancel();
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => TestPage_(widget.part)));
+      Future.delayed(Duration(milliseconds: 2), () {
+        print('0.2秒後に開始される。');
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => TestPage_(widget.part)));
+      });
     });
-    _current = 3;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    print('initstate');
+    startTimer();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: backButton(widget.part),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -61,13 +72,6 @@ class _count_pageState extends State<count_page> {
                 fontSize: 300,
                 color: Colors.blueGrey,
               ),
-            ),
-            // ⑦カウントダウン関数を実行するボタン
-            ElevatedButton(
-              onPressed: () {
-                startTimer();
-              },
-              child: Text("start"),
             ),
           ],
         ),

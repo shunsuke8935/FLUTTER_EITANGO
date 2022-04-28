@@ -15,7 +15,7 @@ Map iconColor = {
 
 //戻るボタンの共通
 class backButton extends StatefulWidget with PreferredSizeWidget {
-  backButton(this.part);
+  backButton(this.part, [sub]);
   String part;
 
   @override
